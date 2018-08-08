@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name = "struts.devMode" value = "true" />
+    <package name = "example" extends = "struts-default">
+        <action name="ListUserAction"
+                class="org.struts.example.UserAction"
+                method="ListUser">
+            <result name="success">/ListUser.jsp</result>
+        </action>
+        <action name="AddUserAction"
+                class="org.struts.example.UserAction"
+                method="AddUser">
+            <result name="success">/AddUser.jsp</result>
+        </action>
+
+        <action name="EditUserAction"
+                class="org.struts.example.UserAction"
+                method="EditUser">
+            <result name="success">/EditUser.jsp</result>
+        </action>
+        <action name="DeleteUserAction"
+                class="org.struts.example.UserAction"
+                method="DeleteUser">
+            <result name="success">/DeleteUser.jsp</result>
+        </action>
+
+       <!-- <action name="/*UserAction"
+                class="org.struts.example.UserAction"
+                method="{1}User">
+            <result name="success">/{1}User.jsp</result>
+        </action>-->
+
+    </package>
+</struts>

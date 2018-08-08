@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+  
+<hibernate-configuration>
+    <session-factory>
+		<!-- Database connection settings -->
+		<!--
+		instead of changing these properties,
+		please override this properties by providing properties object
+		see ABMFOperationTest.java
+
+		-->
+        <property name="current_session_context_class">thread</property>
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
+		<property name="connection.pool_size">1</property>
+        <property name="hibernate.connection.driver_class">org.h2.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+		<property name="hibernate.connection.url">jdbc:h2:./training.db</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<!--<property name="org.jboss.logging.provider">log4j2</property>-->
+
+		<!-- Resource mapping -->
+		<!--<mapping class="com.hibernate.training.basic.pojo.Student"/>
+		<mapping class="com.hibernate.training.compositeprimarykey.pojo.Creature"/>
+		<mapping class="com.hibernate.training.compositeprimarykey.pojo.CreatureId"/>-->
+
+
+
+
+
+
+  </session-factory>
+</hibernate-configuration>

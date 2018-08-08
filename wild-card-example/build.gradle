@@ -1,15 +1,6 @@
 
 apply plugin: 'war'
 
-sourceCompatibility = 1.8
-
-repositories {
-    maven { url "http://192.168.2.138:10000/artifactory/libs-snapshot-local"}
-    maven { url "http://192.168.2.138:10000/artifactory/libs-release-local"}
-    maven { url "http://192.168.2.138:10000/artifactory/jcenter"}
-    mavenCentral()
-}
-
 dependencies {
     compile (group: 'org.apache.struts', name: 'struts2-core', version: '2.3.34')
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version:'3.1.0'

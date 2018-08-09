@@ -3,6 +3,7 @@ package org.struts.example;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class HelloWorldAction extends ActionSupport {
+	
     private String name;
 
     public String execute() throws Exception {

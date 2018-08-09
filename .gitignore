@@ -3,5 +3,10 @@
 **/out/**
 **/build/**
 training.db.mv.db
+**/.project
+**/.classpath
+**/.settings/**
+**/bin/**
 
 
+/.gradle/

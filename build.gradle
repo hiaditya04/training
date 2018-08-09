@@ -1,13 +1,17 @@
 
 // Apply the java plugin to add support for Java
-apply plugin: 'java'
 
-sourceCompatibility = 1.8
+allprojects {
+    apply plugin: 'java'
 
-repositories {
-    maven { url "http://192.168.2.138:10000/artifactory/libs-snapshot-local"}
-    maven { url "http://192.168.2.138:10000/artifactory/libs-release-local"}
-    maven { url "http://192.168.2.138:10000/artifactory/jcenter"}
-    mavenCentral()
+    sourceCompatibility = 1.8
+    
+    repositories {
+        maven { url "http://192.168.2.138:10000/artifactory/libs-snapshot-local"}
+        maven { url "http://192.168.2.138:10000/artifactory/libs-release-local"}
+        maven { url "http://192.168.2.138:10000/artifactory/jcenter"}
+        mavenCentral()
+    }
 }
+
 

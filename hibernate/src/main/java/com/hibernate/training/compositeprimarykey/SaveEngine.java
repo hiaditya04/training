@@ -1,13 +1,13 @@
 package com.hibernate.training.compositeprimarykey;
 
-import com.hibernate.training.HibernateSessionFactory;
-import com.hibernate.training.compositeprimarykey.pojo.Creature;
-import com.hibernate.training.compositeprimarykey.pojo.CreatureId;
-import javassist.bytecode.stackmap.BasicBlock;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import com.hibernate.training.HibernateSessionFactory;
+import com.hibernate.training.compositeprimarykey.pojo.Creature;
+import com.hibernate.training.compositeprimarykey.pojo.CreatureId;
 
 public class SaveEngine {
 
@@ -16,6 +16,8 @@ public class SaveEngine {
             System.out.println("********** START ************");
             Configuration configurationObj = new Configuration();
             configurationObj.configure("hibernate.cfg.xml");
+            configurationObj.addAnnotatedClass(Creature.class);
+            configurationObj.addAnnotatedClass(CreatureId.class);
 
             SessionFactory sessionFactoryObj = configurationObj.buildSessionFactory();
             Session sessionObj = sessionFactoryObj.openSession();

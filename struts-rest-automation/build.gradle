@@ -2,6 +2,9 @@ apply plugin: 'war'
 
 dependencies {
     compile group: 'org.apache.struts', name: 'struts2-rest-showcase', version: '2.3.34'
+    // https://mvnrepository.com/artifact/org.apache.struts/struts2-config-browser-plugin
+compile group: 'org.apache.struts', name: 'struts2-config-browser-plugin', version: '2.3.34'
+    
     
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version:'3.1.0'
     compileOnly group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version:'2.3.1'

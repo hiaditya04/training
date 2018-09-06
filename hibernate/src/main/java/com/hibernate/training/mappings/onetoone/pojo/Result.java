@@ -59,7 +59,7 @@ public class Result{
 	}
 	
 	@OneToOne(targetEntity=Pupil.class,cascade=CascadeType.ALL)	
-	@JoinColumn(name="ST_ROLL_NUMBER",referencedColumnName="ST_ROLL_NUMBER")
+	@JoinColumn(name="ST_ROLL_NUMBER_IN_RESULT",referencedColumnName="ST_ROLL_NUMBER")
 	public Pupil getPupil() {
 		return pupil;
 	}

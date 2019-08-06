@@ -1,7 +1,7 @@
 package com.hibernate.training.mappings.onetoone;
 
-import com.hibernate.training.mappings.onetoone.pojo.Pupil;
-import com.hibernate.training.mappings.onetoone.pojo.Result;
+import com.hibernate.training.mappings.onetoone.pojo.Student;
+import com.hibernate.training.mappings.onetoone.pojo.Address;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -14,25 +14,26 @@ public class HibernateEngine_Select {
     	System.out.println(" .. ONE TO ONE ANNOTATION SELECT LESSON ..\n");
         Configuration configurationObj = new Configuration();
         configurationObj.configure("hibernate.cfg.xml");
-        configurationObj.addAnnotatedClass(Pupil.class);
-        configurationObj.addAnnotatedClass(Result.class);
+        configurationObj.addAnnotatedClass(Student.class);
+        configurationObj.addAnnotatedClass(Address.class);
         SessionFactory sessionFactoryObj = configurationObj.buildSessionFactory();
         Session sessionObj = sessionFactoryObj.openSession();
-         
-        Result resultObj = (Result) sessionObj.get(Result.class, new Integer(4));
-        Pupil pupilObj= resultObj.getPupil();
-                
-        System.out.println("\n--------Pupil Data----------");
-        System.out.println("Id	: "+pupilObj.getRollNumber());
-        System.out.println("Name	: "+pupilObj.getName());
-        System.out.println("Address	: "+pupilObj.getAddress());
+
+        /*Address address = (Address) sessionObj.get(Address.class, new Integer(1));
+        Student student= address.getStudent();*/
+
+        Student student= (Student) sessionObj.get(Student.class, new Integer(1));
+        Address address = student.getAddress();
+
+        System.out.println("\n--------Student Data----------");
+        System.out.println("Id	: "+student.getRollNumber());
+        System.out.println("Name	: "+student.getName());
         System.out.println("\n------------------------------\n");
                        
-        System.out.println("\n---------Result Data--------");                       
-        System.out.println("Maths-Marks	: "+resultObj.getMathsMarks());
-        System.out.println("Science-Marks	: "+resultObj.getScienceMarks());
-        System.out.println("Total-Marks	: "+resultObj.getTotalMarks());
-        
+        System.out.println("\n---------Address Data--------");
+        System.out.println("Name	: "+address.getName());
+        System.out.println("Area	: "+address.getArea());
+
         System.out.println("-------------------------------");                
         sessionObj.close();
         sessionFactoryObj.close();

@@ -4,8 +4,8 @@ package com.hibernate.training.mappings.onetoone;
 /*
  * Author : RAJ 
  */
-import com.hibernate.training.mappings.onetoone.pojo.Pupil;
-import com.hibernate.training.mappings.onetoone.pojo.Result;
+import com.hibernate.training.mappings.onetoone.pojo.Address;
+import com.hibernate.training.mappings.onetoone.pojo.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,14 +20,14 @@ public class HibernateEngine_Delete {
     	System.out.println(" .. ONE TO ONE ANNOTATION DELETE LESSON ..\n");
         Configuration configurationObj = new Configuration();
         configurationObj.configure("hibernate.cfg.xml");
-        configurationObj.addAnnotatedClass(Pupil.class);
-        configurationObj.addAnnotatedClass(Result.class);
+        configurationObj.addAnnotatedClass(Student.class);
+        configurationObj.addAnnotatedClass(Address.class);
         SessionFactory sessionFactoryObj = configurationObj.buildSessionFactory();
         Session sessionObj = sessionFactoryObj.openSession();
-         
-        Result resultObj = (Result) sessionObj.get(Result.class, new Integer(4));
+
+        Address address = (Address) sessionObj.get(Address.class, new Integer(1));
         Transaction transactionObj = sessionObj.beginTransaction();        
-        sessionObj.delete(resultObj);                
+        sessionObj.delete(address);
         transactionObj.commit();
         
         System.out.println("\n....... DATA DELETED SUCCESSFULLY ..........");

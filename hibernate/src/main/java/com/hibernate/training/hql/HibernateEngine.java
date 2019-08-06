@@ -1,8 +1,7 @@
 package com.hibernate.training.hql;
 
+import com.hibernate.training.basic.pojo.Student;
 import java.util.List;
-
-import com.hibernate.training.hql.pojo.Entity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,15 +18,15 @@ public class HibernateEngine {
         SessionFactory sessionFactoryObj = configurationObj.buildSessionFactory();                
         Session sessionObj = sessionFactoryObj.openSession();      
         
-        Criteria criteriaObj =  sessionObj.createCriteria(Entity.class);
-        List<Entity> 	entityList = criteriaObj.list();        
+        Criteria criteriaObj =  sessionObj.createCriteria(Student.class);
+        List<Student> 	students = criteriaObj.list();
         
-        System.out.println("ID\t NAME \t CATEGORY");
+        System.out.println("ROLLNO\t NAME \t ADDRESS");
         System.out.println("-----------------------");
-        for(Entity entityObj : entityList){        	
-        	System.out.print(entityObj.getId());
-        	System.out.print("\t"+entityObj.getName());
-        	System.out.println("\t"+entityObj.getCategory());
+        for(Student student : students){
+        	System.out.print(student.getRollNumber());
+        	System.out.print("\t"+student.getName());
+        	System.out.println("\t"+student.getAddress());
         }
         System.out.println("-----------------------");
         

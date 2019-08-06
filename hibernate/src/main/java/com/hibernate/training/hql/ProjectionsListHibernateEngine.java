@@ -1,9 +1,8 @@
 package com.hibernate.training.hql;
 
+import com.hibernate.training.basic.pojo.Student;
 import java.util.Iterator;
 import java.util.List;
-
-import com.hibernate.training.hql.pojo.Entity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,18 +21,18 @@ public class ProjectionsListHibernateEngine {
         
         SessionFactory sessionFactoryObj = configurationObj.buildSessionFactory();                
         Session sessionObj = sessionFactoryObj.openSession();              
-        Criteria criteriaObj=sessionObj.createCriteria(Entity.class);
+        Criteria criteriaObj=sessionObj.createCriteria(Student.class);
         criteriaObj.addOrder(Order.desc("id"));
         
         ProjectionList projList = Projections.projectionList();
-        projList.add(Projections.property("id"));
-        projList.add(Projections.property("category"));
+        projList.add(Projections.property("rollNumber"));
+        projList.add(Projections.property("address"));
         criteriaObj.setProjection(projList);
         
-        List 	entityList=criteriaObj.list();        
-        Iterator  iteratorObj=entityList.iterator();
+        List 	students=criteriaObj.list();
+        Iterator  iteratorObj=students.iterator();
         
-        System.out.println("ID \t CATEGORY ");
+        System.out.println("ROLLNO \t ADDRESS ");
         System.out.println("^^^^^^^^^^^^^^^^^^^^");
         while(iteratorObj.hasNext()){
         	Object data[]=(Object[])iteratorObj.next();

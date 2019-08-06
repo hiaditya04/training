@@ -1,7 +1,7 @@
 package com.hibernate.training.mappings.manytoone;
 
-import com.hibernate.training.mappings.manytoone.pojo.Children;
-import com.hibernate.training.mappings.manytoone.pojo.Parent;
+import com.hibernate.training.mappings.manytoone.pojo.Student;
+import com.hibernate.training.mappings.manytoone.pojo.Subject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,36 +12,36 @@ public class HibernateEngine_Insert{
     {    	
     	System.out.println(" .......ENGINE START ............");
     	System.out.println(" .. MANY TO ONE ANNONTATION INSERT LESSON ..");
-        Configuration condigurationObj = new Configuration();
-        condigurationObj.configure("hibernate.cfg.xml");
-        condigurationObj.addAnnotatedClass(Children.class);
-        condigurationObj.addAnnotatedClass(Parent.class);
+        Configuration configurationObj = new Configuration();
+        configurationObj.configure("hibernate.cfg.xml");
+        configurationObj.addAnnotatedClass(Student.class);
+        configurationObj.addAnnotatedClass(Subject.class);
+       //configurationObj.setProperty("hibernate.hbm2ddl.auto","create");
  
-        SessionFactory factoryObj = condigurationObj.buildSessionFactory();
-        Session sessionObj = factoryObj.openSession();        
+        SessionFactory sessionFactory = configurationObj.buildSessionFactory();
+        Session session = sessionFactory.openSession();
                                    
-        Parent parentObj=new Parent();
-        parentObj.setName("Karna");
+        Subject subject=new Subject();
+
+        subject.setName("JAVA");
         
-        Children childObj1=new Children();
-        childObj1.setName("Abhi");
-        childObj1.setAge(11);
-        childObj1.setParentObj(parentObj);
+        Student student=new Student();
+        student.setName("Jack");
+        student.setSubject(subject);
+
+        Student student1=new Student();
+        student1.setName("Jill");
+        student1.setSubject(subject);
         
-        Children childObj2=new Children();
-        childObj2.setName("Adi");
-        childObj2.setAge(10);
-        childObj2.setParentObj(parentObj);
-        
-        Transaction transaction=sessionObj.beginTransaction();
-        sessionObj.save(childObj1);
-        sessionObj.save(childObj2);
+        Transaction transaction=session.beginTransaction();
+        session.save(student);
+        session.save(student1);
                 
         transaction.commit();        
         System.out.println(".. DATA INSERTED SUCCESSFULLY ..");
-        
-        sessionObj.close();        
-        factoryObj.close();
+        session.flush();
+        session.close();
+        sessionFactory.close();
         
         System.out.println(".......ENGINE STOP ..........");
     } 

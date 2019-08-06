@@ -1,7 +1,7 @@
 package com.hibernate.training.mappings.manytoone;
 
-import com.hibernate.training.mappings.manytoone.pojo.Children;
-import com.hibernate.training.mappings.manytoone.pojo.Parent;
+import com.hibernate.training.mappings.manytoone.pojo.Student;
+import com.hibernate.training.mappings.manytoone.pojo.Subject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,33 +16,33 @@ public class HibernateEngine_Update {
     	System.out.println(" .. MANY TO ONE ANNOTATION UPDATE LESSON ..");
         Configuration condigurationObj = new Configuration();
         condigurationObj.configure("hibernate.cfg.xml");
-        condigurationObj.addAnnotatedClass(Children.class);
-        condigurationObj.addAnnotatedClass(Parent.class);
+        condigurationObj.addAnnotatedClass(Student.class);
+        condigurationObj.addAnnotatedClass(Subject.class);
  
         SessionFactory factoryObj = condigurationObj.buildSessionFactory();
-        Session sessionObj = factoryObj.openSession();        
+        Session session = factoryObj.openSession();
                            
-        Children childObj = (Children) sessionObj.get(Children.class, new Integer(1));
-        childObj.setName("Nandni");
-        childObj.setAge(20);
+        Student student = (Student) session.get(Student.class, new Integer(8));
+        student.setName("Anna");
+
+        /* In below two line we are changing the already exist subject name*/
+        Subject subject = student.getSubject();
+        subject.setName("C++");
         
-        /* In below two line we are changing the already exist parent name*/
-        Parent parentObj = childObj.getParentObj();
-        parentObj.setName("Divyansha");
-        
-        /* Using below three line we can add a new parent for the existing child */
+        /* Using below three line we can add a new subject for the existing student */
         /* 
-        Parent newParentObj = new Parent();
-        newParentObj.setName("Divyesh");
-        childObj.setParentObj(newParentObj);
+        Subject newSubject = new Subject();
+        newSubject.setName("C");
+        student.setSubject(newSubject);
         */
         
-        Transaction transactionObj=sessionObj.beginTransaction();        
-        sessionObj.update(childObj);                
+        Transaction transactionObj=session.beginTransaction();
+        session.update(student);
         transactionObj.commit();
         
         System.out.println("\n....... DATA UPDATED SUCCESSFULLY ..........");
-        sessionObj.close();
+        session.flush();
+        session.close();
         factoryObj.close();
         
         System.out.println("....... ENGINE STOP ..........");

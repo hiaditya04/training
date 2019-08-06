@@ -3,25 +3,25 @@ package com.hibernate.training.mappings.onetoone.pojo;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "PUPILS_DATA")
-public class Pupil {
+@Entity(name="com.hibernate.training.mappings.onetoone.pojo.Student")
+@Table(name = "STUDENT")
+public class Student {
 
-	int rollNumber;
+	private int rollNumber;
 
-	String name;
+	private String name;
 
-	String address;
-
-	private Result result;
+	private Address address;
 
 	@Id
-	@Column(name = "ST_ROLL_NUMBER")
+	@Column(name = "ROLL_NUMBER")
+	//@GeneratedValue
 	public int getRollNumber() {
 		return rollNumber;
 	}
@@ -39,22 +39,15 @@ public class Pupil {
 		this.name = name;
 	}
 
-	@Column(name = "ADDRESS")
-	public String getAddress() {
+
+
+	@OneToOne(targetEntity = Address.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ROLL_NUMBER", referencedColumnName = "ROLL_NUMBER")
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
-	}
-
-	@OneToOne(targetEntity = Result.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "ST_ROLL_NUMBER", referencedColumnName = "ST_ROLL_NUMBER")
-	public Result getResult() {
-		return result;
-	}
-
-	public void setResult(Result result) {
-		this.result = result;
 	}
 }

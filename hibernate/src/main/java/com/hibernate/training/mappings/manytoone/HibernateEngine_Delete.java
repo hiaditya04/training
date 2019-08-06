@@ -3,8 +3,8 @@ package com.hibernate.training.mappings.manytoone;
  * Author : RAJ
  */
 
-import com.hibernate.training.mappings.manytoone.pojo.Children;
-import com.hibernate.training.mappings.manytoone.pojo.Parent;
+import com.hibernate.training.mappings.manytoone.pojo.Student;
+import com.hibernate.training.mappings.manytoone.pojo.Subject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,19 +19,19 @@ public class HibernateEngine_Delete {
     	System.out.println(" .. MANY TO ONE ANNOTATION DELETE LESSON ..\n");
         Configuration condigurationObj = new Configuration();
         condigurationObj.configure("hibernate.cfg.xml");
-        condigurationObj.addAnnotatedClass(Children.class);
-        condigurationObj.addAnnotatedClass(Parent.class);
+        condigurationObj.addAnnotatedClass(Student.class);
+        condigurationObj.addAnnotatedClass(Subject.class);
  
         SessionFactory factoryObj = condigurationObj.buildSessionFactory();
-        Session sessionObj = factoryObj.openSession();         
+        Session session = factoryObj.openSession();
                            
-        Children childObj= (Children) sessionObj.get(Children.class, new Integer(2));
-        Transaction transaction=sessionObj.beginTransaction();        
-        sessionObj.delete(childObj);                
+        Student student= (Student) session.get(Student.class, new Integer(9));
+        Transaction transaction=session.beginTransaction();
+        session.delete(student);
         transaction.commit();
         
         System.out.println("\n....... DATA DELETED SUCCESSFULLY ..........");
-        sessionObj.close();
+        session.close();
         factoryObj.close();
         
         System.out.println("\n....... ENGINE STOP ..........");

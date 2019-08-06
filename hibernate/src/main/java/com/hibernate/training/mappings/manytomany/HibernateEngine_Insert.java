@@ -32,11 +32,11 @@ public class HibernateEngine_Insert {
 		mobilePhoneSet.add(phoneObj2);
 
 		User userObj1 = new User();
-		userObj1.setName("Steve Jobs");
+		userObj1.setName("Jay");
 		userObj1.setAddress("Baroda, Alkapuri");
 
 		User userObj2 = new User();
-		userObj2.setName("Bill Gates");
+		userObj2.setName("Neel");
 		userObj2.setAddress("Bharuch,Narmada Colony");
 
 		Set<User> userSet = new HashSet<User>();

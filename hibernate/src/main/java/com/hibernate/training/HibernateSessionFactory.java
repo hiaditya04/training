@@ -29,10 +29,10 @@ public class HibernateSessionFactory {
         return hibernateSessionFactory;
     }
 
-    public void shutDown(){
+    /*public void shutDown(){
         sessionFactory.close();
 
-    }
+    }*/
 
     public static void buildSessionFactory() {
         Configuration cfg = new Configuration();

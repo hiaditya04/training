@@ -1,5 +1,6 @@
 package com.hibernate.training.hql;
 
+import com.hibernate.training.basic.pojo.Student;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,39 +18,39 @@ public class ANDOROperatorsHibernateEngine {
     public static void main(String[] dataBag)
     {
     	System.out.println("------- ENGINE START---------");    	      
-        Configuration configurationObj =  new Configuration();        
+        Configuration configurationObj =  new Configuration();
         configurationObj.configure("hibernate.cfg.xml");
         configurationObj.addAnnotatedClass(Entity.class);
         
         SessionFactory sessionFactoryObj = configurationObj.buildSessionFactory();                
         Session sessionObj = sessionFactoryObj.openSession();        
         
-        Criteria criteriaObj = sessionObj.createCriteria(Entity.class);
+        Criteria criteriaObj = sessionObj.createCriteria(Student.class);
         
         /* AND operator */
         
         //criteriaObj.add(Restrictions.and(Restrictions.like("name","%N%"), Restrictions.gt("id", new Integer(1))));
-        //criteriaObj.add(Restrictions.and(Restrictions.like("name","%N%").ignoreCase(), Restrictions.gt("id", new Integer(1))));
+        //criteriaObj.add(Restrictions.and(Restrictions.like("name","%N%").ignoreCase(), Restrictions.gt("id", new Integer(130))));
         
         /*  OR operator */
-        criteriaObj.add(
+        /*criteriaObj.add(
         			Restrictions.or(
         						Restrictions.like("name","%k%").ignoreCase(), 
         						Restrictions.gt("id", new Integer(0))
         					)
-        			);
+        			);*/
         
-        criteriaObj.addOrder(Order.desc("category"));       
+        criteriaObj.addOrder(Order.desc("address"));
         List 	entityList=criteriaObj.list();        
-        Iterator  entityListIterator=entityList.iterator();
+        Iterator  studentIteratorList=entityList.iterator();
         
-        System.out.println("ID\t NAME \t CATEGORY");
+        System.out.println("ROLLNO\t NAME \t ADDRESS");
         System.out.println("-------------------------");
-        while(entityListIterator.hasNext()){        	
-        	Entity entityObj=(Entity)entityListIterator.next();
-        	System.out.print(entityObj.getId());
-        	System.out.print(" \t"+entityObj.getName());
-        	System.out.println(" \t"+entityObj.getCategory());
+        while(studentIteratorList.hasNext()){
+        	Student student=(Student) studentIteratorList.next();
+        	System.out.print(student.getRollNumber());
+        	System.out.print(" \t"+student.getName());
+        	System.out.println(" \t"+student.getAddress());
         }
         System.out.println("-------------------------");
         

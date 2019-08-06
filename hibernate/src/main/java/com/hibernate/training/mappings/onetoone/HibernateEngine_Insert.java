@@ -2,8 +2,8 @@ package com.hibernate.training.mappings.onetoone;
 
 
 
-import com.hibernate.training.mappings.onetoone.pojo.Pupil;
-import com.hibernate.training.mappings.onetoone.pojo.Result;
+import com.hibernate.training.mappings.onetoone.pojo.Student;
+import com.hibernate.training.mappings.onetoone.pojo.Address;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,33 +15,31 @@ public class HibernateEngine_Insert {
     {
     	System.out.println(".......ENGINE START.......");  
     	System.out.println(".. ONE TO ONE ANNOTATION INSERT LESSON ..");
-        Configuration configurationObj = new Configuration();
-        configurationObj.configure("hibernate.cfg.xml");
-        configurationObj.addAnnotatedClass(Pupil.class);
-        configurationObj.addAnnotatedClass(Result.class);
- 
-        SessionFactory sessionFactoryObj = configurationObj.buildSessionFactory();
-        Session sessionObj = sessionFactoryObj.openSession();
+        Configuration configuration = new Configuration();
+        configuration.configure("hibernate.cfg.xml");
+        configuration.addAnnotatedClass(Student.class);
+        configuration.addAnnotatedClass(Address.class);
 
-    	Pupil pupilObj = new Pupil();
-    	pupilObj.setRollNumber(4);
-    	pupilObj.setName("Digpal");
-    	pupilObj.setAddress("Raj-Palace,Mahel-Road,Baroda");    	
+        SessionFactory sessionFactoryObj = configuration.buildSessionFactory();
+        Session session = sessionFactoryObj.openSession();
+
+        Student student = new Student();
+        student.setRollNumber(1);
+        student.setName("John");
+
+        Address address = new Address();
+        address.setRollNumber(student.getRollNumber());
+        address.setName("Magnet Corporate park");
+        address.setArea("Thaltej");
+        address.setStudent(student);
+        student.setAddress(address);
         
-        Result resultObj = new Result();
-        resultObj.setRollNumber(pupilObj.getRollNumber());
-        resultObj.setMathsMarks(43);
-        resultObj.setScienceMarks(60);
-        resultObj.setTotalMarks((resultObj.getScienceMarks()+resultObj.getMathsMarks()));        
-        resultObj.setPupil(pupilObj);        
-        pupilObj.setResult(resultObj);
-        
-        Transaction transactionObj = sessionObj.beginTransaction();
-        //sessionObj.save(resultObj);
-        sessionObj.save(pupilObj);
+        Transaction transactionObj = session.beginTransaction();
+        //sessionObj.save(address);
+        session.save(student);
                 
         transactionObj.commit();        
-        sessionObj.close();        
+        session.close();
         sessionFactoryObj.close();
         System.out.println("....... DATA SAVED SUCCESSFULLY ............");
         System.out.println(".......ENGINE STOP.......");

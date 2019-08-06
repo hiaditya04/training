@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.StringJoiner;
 
-@Entity
+@Entity(name = "com.hibernate.training.basic.pojo.Student")
 @Table(name="TBLM_STUDENT")
 public class Student {
     private int rollNumber;
@@ -33,7 +33,7 @@ public class Student {
         this.rollNumber = rollNumber;
     }
 
-    @Column(name = "FIRST_NAME")
+    @Column(name = "NAME")
     public String getName() {
         return name;
     }

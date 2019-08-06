@@ -4,13 +4,13 @@ public class Entity{
 
 	private int id;
 	String name;
-	String category;
+	String address;
 	
-	public String getCategory() {
-		return category;
+	public String getAddress() {
+		return address;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public int getId() {
 		return id;

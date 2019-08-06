@@ -22,7 +22,7 @@ public class HibernateEngine_Update {
         Session session = factory.openSession();        
                            
         User userObj = (User) session.get(User.class, new Integer(2));
-        userObj.setName("Dharm");
+        userObj.setName("Navya");
         Set<MobilePhone> mobilePhoneSet = userObj.getMobilePhones();
         
         for(MobilePhone phone:mobilePhoneSet){

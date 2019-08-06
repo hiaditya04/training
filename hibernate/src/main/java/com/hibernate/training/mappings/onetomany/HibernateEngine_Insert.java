@@ -1,49 +1,51 @@
 package com.hibernate.training.mappings.onetomany;
 
-
-
-import com.hibernate.training.mappings.onetoone.pojo.Pupil;
-import com.hibernate.training.mappings.onetoone.pojo.Result;
+import com.hibernate.training.mappings.onetomany.pojo.Student;
+import com.hibernate.training.mappings.onetomany.pojo.Subject;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
- 
-public class HibernateEngine_Insert { 
- 
+
+public class HibernateEngine_Insert{  
     public static void main(String[] javaPlanet)
-    {
-    	System.out.println(".......ENGINE START.......");  
-    	System.out.println(".. ONE TO ONE ANNOTATION INSERT LESSON ..");
+    {    	
+    	System.out.println(" .......ENGINE START ............");
+    	System.out.println(" .. MANY TO ONE ANNONTATION INSERT LESSON ..");
         Configuration configurationObj = new Configuration();
         configurationObj.configure("hibernate.cfg.xml");
-        configurationObj.addAnnotatedClass(Result.class);
-        configurationObj.addAnnotatedClass(Pupil.class);
-        SessionFactory sessionFactoryObj = configurationObj.buildSessionFactory();
-        Session sessionObj = sessionFactoryObj.openSession();
+        configurationObj.addAnnotatedClass(Student.class);
+        configurationObj.addAnnotatedClass(Subject.class);
 
-    	Pupil pupilObj = new Pupil();
-    	pupilObj.setRollNumber(4);
-    	pupilObj.setName("aditya");
-    	pupilObj.setAddress("science city");
+        SessionFactory sessionFactory = configurationObj.buildSessionFactory();
+        Session session = sessionFactory.openSession();
+
         
-        Result resultObj = new Result();
-        resultObj.setRollNumber(pupilObj.getRollNumber());
-        resultObj.setMathsMarks(43);
-        resultObj.setScienceMarks(60);
-        resultObj.setTotalMarks((resultObj.getScienceMarks()+resultObj.getMathsMarks()));        
-        resultObj.setPupil(pupilObj);        
-        pupilObj.setResult(resultObj);
-        
-        Transaction transactionObj = sessionObj.beginTransaction();
-        //sessionObj.save(resultObj);
-        sessionObj.save(pupilObj);
+        Student student=new Student();
+        student.setName("Jack");
+
+        Student student1=new Student();
+        student1.setName("Jill");
+
+        List students = new ArrayList<Student>();
+        students.add(student);
+        students.add(student1);
+
+
+        Subject subject=new Subject();
+        subject.setName("JAVA");
+        subject.setStudents(students);
+        Transaction transaction=session.beginTransaction();
+        session.save(subject);
+
                 
-        transactionObj.commit();        
-        sessionObj.close();        
-        sessionFactoryObj.close();
-        System.out.println("....... DATA SAVED SUCCESSFULLY ............");
-        System.out.println(".......ENGINE STOP.......");
-    }
- 
+        transaction.commit();        
+        System.out.println(".. DATA INSERTED SUCCESSFULLY ..");
+        session.close();
+        sessionFactory.close();
+        
+        System.out.println(".......ENGINE STOP ..........");
+    } 
 }

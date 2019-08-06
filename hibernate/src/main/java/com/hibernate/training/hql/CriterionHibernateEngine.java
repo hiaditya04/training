@@ -1,9 +1,8 @@
 package com.hibernate.training.hql;
 
+import com.hibernate.training.basic.pojo.Student;
 import java.util.Iterator;
 import java.util.List;
-
-import com.hibernate.training.hql.pojo.Entity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,24 +22,24 @@ public class CriterionHibernateEngine {
         SessionFactory sessionFactoryObj = configurationObj.buildSessionFactory();                
         Session sessionObj = sessionFactoryObj.openSession();        
         
-        Criteria criteriaObj = sessionObj.createCriteria(Entity.class);
-        Criterion criterion = Restrictions.gt("id", new Integer(0)); //  means :  where id > 2
+        Criteria criteriaObj = sessionObj.createCriteria(Student.class);
+        Criterion criterion = Restrictions.gt("rollNumber", new Integer(122)); //  means :  where id > 120
         criteriaObj.add(criterion);
         
-        criteriaObj.addOrder(Order.desc("id"));	 // will fetch the data into descending order
-        //criteriaObj.addOrder(Order.asc("id")); // will fetch the data into ascending order
+        criteriaObj.addOrder(Order.desc("rollNumber"));	 // will fetch the data into descending order
+        //criteriaObj.addOrder(Order.asc("rollNumber")); // will fetch the data into ascending order
         
-        List 	entityList = criteriaObj.list();        
-        Iterator  entityListIterator = entityList.iterator();
+        List 	students = criteriaObj.list();
+        Iterator  studentIterator = students.iterator();
         
-        System.out.println("ID\t NAME \t CATEGORY");
+        System.out.println("ROLLNO\t NAME \t ADDRESS");
         System.out.println("-------------------------");
         
-        while(entityListIterator.hasNext()){        	
-        	Entity entityObj=(Entity)entityListIterator.next();
-        	System.out.print(entityObj.getId());
-        	System.out.print(" \t"+entityObj.getName());
-        	System.out.println(" \t"+entityObj.getCategory());
+        while(studentIterator.hasNext()){
+        	Student student=(Student)studentIterator.next();
+        	System.out.print(student.getRollNumber());
+        	System.out.print(" \t"+student.getName());
+        	System.out.println(" \t"+student.getAddress());
         }
         
         System.out.println("-------------------------");

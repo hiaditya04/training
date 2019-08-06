@@ -9,16 +9,23 @@ public class StudentOperations {
 
     public static void main(String[] args) {
         try {
-            Student student = new Student(120, "aditya", "science city");
+            Student student = new Student(120, "Jack", "Magnet Corporate Park");
+
             HibernateSessionFactory.buildSessionFactory();
-            Session newSession = HibernateSessionFactory.getNewSession();
-            Transaction transaction = newSession.beginTransaction();
-            newSession.save(student);
+            Session session = HibernateSessionFactory.getNewSession();
+            Transaction transaction = session.beginTransaction();
+            session.save(student);
+
             transaction.commit();
-            newSession.close();
-            newSession = HibernateSessionFactory.getNewSession();
-            Student o = (Student) newSession.get(Student.class, 120);
-            System.out.println(o);
+            session.close();
+
+
+
+
+            session = HibernateSessionFactory.getNewSession();
+            Student studentData = (Student) session.get(Student.class, 120);
+            System.out.println("----------------- STUDENT DATA -----------------------");
+            System.out.println(studentData);
         }finally {
             HibernateSessionFactory.shutdown();
         }

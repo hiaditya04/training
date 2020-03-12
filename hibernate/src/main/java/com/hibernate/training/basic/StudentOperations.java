@@ -19,9 +19,6 @@ public class StudentOperations {
             transaction.commit();
             session.close();
 
-
-
-
             session = HibernateSessionFactory.getNewSession();
             Student studentData = (Student) session.get(Student.class, 120);
             System.out.println("----------------- STUDENT DATA -----------------------");

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.StringJoiner;
+import org.hibernate.annotations.Type;
 
 @Entity(name = "com.hibernate.training.basic.pojo.Student")
 @Table(name="TBLM_STUDENT")
@@ -12,6 +13,7 @@ public class Student {
     private int rollNumber;
     private String name;
     private String address;
+    private Boolean houseCaptain;
 
     public Student() {
     }
@@ -51,12 +53,26 @@ public class Student {
         this.address = address;
     }
 
+
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    @Column(name="HOUSE_CAPTAIN")
+    public Boolean getHouseCaptain() {
+        return houseCaptain;
+    }
+
+    public void setHouseCaptain(Boolean houseCaptain) {
+        this.houseCaptain = houseCaptain;
+    }
+
+
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Student.class.getSimpleName() + "[", "]")
                 .add("rollNumber=" + rollNumber)
                 .add("name='" + name + "'")
                 .add("address='" + address + "'")
+                .add("house captain= '"+ houseCaptain+" '")
                 .toString();
     }
 }

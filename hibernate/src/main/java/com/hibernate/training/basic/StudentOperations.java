@@ -10,6 +10,7 @@ public class StudentOperations {
     public static void main(String[] args) {
         try {
             Student student = new Student(120, "Jack", "Magnet Corporate Park");
+            student.setHouseCaptain(false);
 
             HibernateSessionFactory.buildSessionFactory();
             Session session = HibernateSessionFactory.getNewSession();

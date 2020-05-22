@@ -27,7 +27,7 @@
     <!--<property name="org.jboss.logging.provider">log4j2</property>-->
 
     <!-- Resource mapping -->
-    <!--<mapping class="com.hibernate.training.basic.pojo.Student"/>-->
+    <mapping class="com.hibernate.training.basic.pojo.Student"/>
     <!--<mapping class="com.hibernate.training.compositeprimarykey.pojo.Creature"/>
     <mapping class="com.hibernate.training.compositeprimarykey.pojo.CreatureId"/>-->
 
